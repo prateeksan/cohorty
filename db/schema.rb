@@ -11,39 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218035746) do
+ActiveRecord::Schema.define(version: 20160218220210) do
 
-  create_table "cohort_incomes", force: :cascade do |t|
-    t.integer  "value"
-    t.string   "month"
+  create_table "cohorts", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "income"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reports", ["student_id"], name: "index_reports_on_student_id"
+
+  create_table "students", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
     t.integer  "cohort_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "cohort_incomes", ["cohort_id"], name: "index_cohort_incomes_on_cohort_id"
-
-  create_table "cohorts", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "incomes", force: :cascade do |t|
-    t.integer  "value"
-    t.string   "month"
-    t.integer  "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "incomes", ["student_id"], name: "index_incomes_on_student_id"
-
-  create_table "students", force: :cascade do |t|
-    t.string   "name"
-    t.string   "cohort"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "students", ["cohort_id"], name: "index_students_on_cohort_id"
 
 end

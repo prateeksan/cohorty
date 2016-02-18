@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CohortIncomeTest < ActiveSupport::TestCase
+class ReportTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
